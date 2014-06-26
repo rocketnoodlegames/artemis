@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  money: 1
+  size: 1
+  defense: 1
+  armor: 1
+  shields: 1
+  weapons: 1
+  ships: 1
+  medical: 1
+  enemy: 1
+
+two:
+  name: MyString
+  money: 1
+  size: 1
+  defense: 1
+  armor: 1
+  shields: 1
+  weapons: 1
+  ships: 1
+  medical: 1
+  enemy: 1

@@ -1,0 +1,43 @@
+<h1>Listing main_stations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Money</th>
+      <th>Size</th>
+      <th>Defense</th>
+      <th>Armor</th>
+      <th>Shields</th>
+      <th>Weapons</th>
+      <th>Ships</th>
+      <th>Medical</th>
+      <th>Enemy</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @main_stations.each do |main_station| %>
+      <tr>
+        <td><%= main_station.name %></td>
+        <td><%= main_station.money %></td>
+        <td><%= main_station.size %></td>
+        <td><%= main_station.defense %></td>
+        <td><%= main_station.armor %></td>
+        <td><%= main_station.shields %></td>
+        <td><%= main_station.weapons %></td>
+        <td><%= main_station.ships %></td>
+        <td><%= main_station.medical %></td>
+        <td><%= main_station.enemy %></td>
+        <td><%= link_to 'Show', main_station %></td>
+        <td><%= link_to 'Edit', edit_main_station_path(main_station) %></td>
+        <td><%= link_to 'Destroy', main_station, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Main station', new_main_station_path %>

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @main_station.name %>
+</p>
+
+<p>
+  <strong>Money:</strong>
+  <%= @main_station.money %>
+</p>
+
+<p>
+  <strong>Size:</strong>
+  <%= @main_station.size %>
+</p>
+
+<p>
+  <strong>Defense:</strong>
+  <%= @main_station.defense %>
+</p>
+
+<p>
+  <strong>Armor:</strong>
+  <%= @main_station.armor %>
+</p>
+
+<p>
+  <strong>Shields:</strong>
+  <%= @main_station.shields %>
+</p>
+
+<p>
+  <strong>Weapons:</strong>
+  <%= @main_station.weapons %>
+</p>
+
+<p>
+  <strong>Ships:</strong>
+  <%= @main_station.ships %>
+</p>
+
+<p>
+  <strong>Medical:</strong>
+  <%= @main_station.medical %>
+</p>
+
+<p>
+  <strong>Enemy:</strong>
+  <%= @main_station.enemy %>
+</p>
+
+<%= link_to 'Edit', edit_main_station_path(@main_station) %> |
+<%= link_to 'Back', main_stations_path %>
