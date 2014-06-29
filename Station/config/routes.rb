@@ -56,3 +56,9 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+Station::Application.routes.draw do
+	resources :main_stations
+	
+	root 'main_stations#index'
+end
