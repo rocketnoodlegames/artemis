@@ -2,7 +2,6 @@ class @Ticker
 	constructor: () ->
 		this.setTickInterval(1000)
 		this.appendValue ('hi')
-		alert 'test 2'
 					
 	setTickInterval: (interval) ->
 		callback = @tick.bind @
@@ -19,6 +18,19 @@ class @Ticker
 		content.value = content.value + inVal
 
 $(document).ready ->
-	@ticker = new Ticker()
-	@ticker.appendValue('hello!')
+	window.ticker = new Ticker()
+	window.ticker.appendValue('hello!')
+	window.resources =
+		block: 10
+		lightMachinery: 1
+	window.buildingManager = new BuildingManager()
+	window.buildingManager.status()
+	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
+	window.buildingManager.addBuilding('Hydroponics', 2)
+	window.buildingManager.status()
+	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
+	window.buildingManager.addBuilding('Hydroponics', 2)
+	window.buildingManager.status()
+	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
+	
 	
