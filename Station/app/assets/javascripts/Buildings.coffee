@@ -5,8 +5,8 @@ window.buildings =
 			lightMachinery: 1
 		operateCost:
 			ore: 5
-			people: 5
 			power: 4
+		labor: 5
 		produces:
 			block: 1
 	Hydroponics:
@@ -14,14 +14,13 @@ window.buildings =
 			block: 5
 		operateCost:
 			power: 1
-			people: 3
+		labor: 3
 		produces:
 			food: 20
 	SolarStation:
 		buildCost:
 			block: 20
-		operateCost:
-			people: 1
+		labor: 1
 		produces:
 			power: 8
 	Housing:
@@ -38,7 +37,7 @@ class @BuildingManager
 			Printing: 1
 			Hydroponics: 3
 			SolarStation: 3
-			Housing: 3
+			Housing: 5
 		
 	addBuilding: (buildingType, buildingAmount) ->
 		if @sufficientResources(buildingType, buildingAmount)
@@ -57,6 +56,22 @@ class @BuildingManager
 				result = false
 				window.ticker.appendValue('\nNot enough resources\n')
 		result
+		
+	tick: () ->
+		# go through all the buildings, see if they have enough resources
+		for buildingName, buildingCount of window.buildings
+			sufficient = true
+			for resourceName, resourceReq of window.buildings[buildingName]['operateCost']
+				if window.resources[resourceName] < resourceReq
+					sufficient = false
+					window.ticker.appendValue("\nNot enough resources: #{resourceName}")
+			if sufficient
+				# subtract the resource requirement
+				for resourceName, resourceReq of window.buildings[buildingName]['operateCost']
+					window.resources[resourceName] -= resourceReq
+				# reward the resources
+				for resourceName, resourceReward of window.buildings[buildingName]['produces']
+					window.resources[resourceName] += resourceReward
 	
 	status: () ->
 		window.ticker.appendValue('\nI have ' + @built['Printing'] + 'printers ' + @built['Hydroponics'] + 'hydros, ' + @built['SolarStation'] + 'solars ' + @built['Housing'] + 'housing\n')

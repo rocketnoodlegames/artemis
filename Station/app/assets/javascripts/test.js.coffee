@@ -1,14 +1,14 @@
 class @Ticker
 	constructor: () ->
 		this.setTickInterval(1000)
-		this.appendValue ('hi')
 					
 	setTickInterval: (interval) ->
 		callback = @tick.bind @
 		setInterval(callback, interval)
 		
 	tick: () ->
-		this.appendValue('test')
+		window.buildingManager?.tick()
+		@appendValue("Update: block#{window.resources['block']}, lightMachinery#{window.resources['lightMachinery']}, food#{window.resources['food']}, ore#{window.resources['ore']}, power#{window.resources['power']}\n")
 		
 	alerter: () ->
 		alert 'test complete'
@@ -19,18 +19,13 @@ class @Ticker
 
 $(document).ready ->
 	window.ticker = new Ticker()
-	window.ticker.appendValue('hello!')
+	#window.ticker.appendValue('hello!' + 10/11)
 	window.resources =
 		block: 10
 		lightMachinery: 1
+		food: 1000
+		power: 1000
+		ore: 20
 	window.buildingManager = new BuildingManager()
-	window.buildingManager.status()
-	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
-	window.buildingManager.addBuilding('Hydroponics', 2)
-	window.buildingManager.status()
-	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
-	window.buildingManager.addBuilding('Hydroponics', 2)
-	window.buildingManager.status()
-	window.ticker.appendValue('stuff ' + window.resources.block + ' || ' + window.resources.lightMachinery)
 	
 	
