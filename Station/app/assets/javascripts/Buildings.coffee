@@ -60,18 +60,24 @@ class @BuildingManager
 	tick: () ->
 		# go through all the buildings, see if they have enough resources
 		for buildingName, buildingCount of window.buildings
+			# determine how many of these buildings are operational
+			operational = window.peopleManager.employed[buildingName] / window.buildings[buildingName]['labor']
+			if isNaN operational
+				operational = @built[buildingName]
+			else
+				operational = Math.min(@built[buildingName], operational)
 			sufficient = true
 			for resourceName, resourceReq of window.buildings[buildingName]['operateCost']
-				if window.resources[resourceName] < resourceReq
+				if window.resources[resourceName] < resourceReq * operational
 					sufficient = false
 					window.ticker.appendValue("\nNot enough resources: #{resourceName}")
 			if sufficient
 				# subtract the resource requirement
 				for resourceName, resourceReq of window.buildings[buildingName]['operateCost']
-					window.resources[resourceName] -= resourceReq
+					window.resources[resourceName] -= resourceReq * operational
 				# reward the resources
 				for resourceName, resourceReward of window.buildings[buildingName]['produces']
-					window.resources[resourceName] += resourceReward
+					window.resources[resourceName] += resourceReward * operational
 	
 	status: () ->
 		window.ticker.appendValue('\nI have ' + @built['Printing'] + 'printers ' + @built['Hydroponics'] + 'hydros, ' + @built['SolarStation'] + 'solars ' + @built['Housing'] + 'housing\n')
